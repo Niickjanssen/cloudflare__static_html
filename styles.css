@@ -26,7 +26,7 @@ body {
   transition: width 0.15s ease-out;
 }
 
-.menu button {
+button {
   position: relative;
   top: 10%;
   left: 20px;

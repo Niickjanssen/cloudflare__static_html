@@ -9,7 +9,7 @@
   </head>
   <body>
     <script>
-      const extendWidth = () => {
+      const extendWidth = async () => {
         let menu = document.getElementById("menu");
         const classes = menu.classList;
         if (classes.contains("extend")) {
@@ -17,14 +17,36 @@
         } else {
           menu.classList.add("extend");
         }
-        console.log(menu.classList);
+      };
+      const fetchPosts = async () => {
+        let apiDiv = document.getElementById("apidiv");
+        if (apiDiv.innerHTML !== "") {
+          apiDiv.innerHTML = "";
+          return;
+        }
+        let innerHtmlStart =
+          "<table> <tr> <th>ID</th> <th>Title</th> <th>Body</th> <th>userId</th> </tr>";
+        let innerHtmlContent = "";
+        let innerHtmlEnd = "</tr>";
+        let response = await fetch(
+          "https://broken-shadow-739d.niickjanssenpsn.workers.dev/"
+        );
+        let apidivContent;
+        response = await response.json();
+        response.forEach((element) => {
+          innerHtmlContent += `<tr><td>${element["id"]}</td><td>${element["title"]}</td><td>${element["body"]}</td><td>${element["userId"]}</td></tr>`;
+        });
+        apiDiv.innerHTML = innerHtmlStart + innerHtmlContent + innerHtmlEnd;
       };
     </script>
     <div class="page">
       <div id="menu" class="menu">
         <button onclick="extendWidth()"></button>
       </div>
-      <div class="content"></div>
+      <div class="content">
+        <button onclick="fetchPosts()"></button>
+        <div id="apidiv"></div>
+      </div>
     </div>
   </body>
 </html>
