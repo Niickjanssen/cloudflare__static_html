@@ -23,7 +23,7 @@ body {
   width: 5%;
   background-color: black;
   height: 100vh;
-  transition: width 0.3s ease-out;
+  transition: width 0.15s ease-out;
 }
 
 .menu button {
